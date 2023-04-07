@@ -1,38 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Place Memo
 
-## Getting Started
+## Tech stack
 
-First, run the development server:
+- [Typescript](https://www.typescriptlang.org/) as the programming language
+- [React](https://reactjs.org/) as the library for the components
+- [Next.js API routes](https://nextjs.org/docs/api-routes/introduction) for server-side API routes as the backend
+- [Jest](https://jestjs.io/) as the unit tests framework
+- [Next](https://nextjs.org/) as the React framework
+- [Vercel](https://vercel.com/) for deployment
+- [Prisma](https://www.prisma.io/) as the ORM for migrations and database access
+- [PostgreSQL](https://www.postgresql.org/) as the database
+
+## Available commands
+
+For running the dev server:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For building the app run:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn build
+yarn start
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Testing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+For executing the unit tests run:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+yarn test
+```
 
-## Learn More
+For checking the code style run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+And finally for checking the types run:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+yarn typecheck
+```
