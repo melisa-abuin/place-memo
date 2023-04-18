@@ -1,22 +1,23 @@
-import React from 'react'
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
-
-const containerStyle = {
-  width: '400px',
-  height: '400px',
-}
-
-const center = {
-  lat: -3.745,
-  lng: -38.523,
-}
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
+import { LocationMarker } from './components/locationMarker'
+import { SearchBox } from './components/searchBox'
 
 export const Map = () => {
   return (
-    <LoadScript googleMapsApiKey="YOUR_API_KEY">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-        <></>
-      </GoogleMap>
-    </LoadScript>
+    <MapContainer
+      center={[51.505, -0.09]}
+      minZoom={2}
+      scrollWheelZoom={true}
+      style={{ height: '100vh', width: '100vw' }}
+      zoom={4}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[49.8397, 24.0297]} />
+      <SearchBox />
+      <LocationMarker />
+    </MapContainer>
   )
 }
