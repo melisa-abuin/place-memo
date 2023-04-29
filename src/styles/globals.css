@@ -105,3 +105,28 @@ a {
     color-scheme: dark;
   }
 }
+
+.leaflet-container .leaflet-control-zoom a {
+  align-items: center;
+  background-color: #4e3d70;
+  border: none;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  display: flex;
+  font: 16px 'Inter';
+  justify-content: center;
+}
+
+.leaflet-container .leaflet-control-zoom-in {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.leaflet-container .leaflet-control-zoom-out {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.leaflet-container .leaflet-control-zoom a:hover {
+  background-color: #2c2638;
+}

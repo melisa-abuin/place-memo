@@ -1,4 +1,4 @@
-import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import { LocationMarker } from './components/locationMarker'
 import { SearchBox } from './components/searchBox'
 
