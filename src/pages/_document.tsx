@@ -8,11 +8,6 @@ export default function Document() {
           rel="stylesheet"
           href="https://unpkg.com/leaflet/dist/leaflet.css"
         />
-
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/leaflet-geosearch@3.7.0/dist/geosearch.css"
-        />
       </Head>
       <body>
         <Main />
