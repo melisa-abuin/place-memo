@@ -1,9 +1,11 @@
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
 import { useState } from 'react'
-import { Icon, LatLng, LeafletMouseEvent } from 'leaflet'
+import { LatLng, LeafletMouseEvent } from 'leaflet'
+import { getMarkerIcon } from '../../utils/getMarkerIcon'
 
 export const LocationMarker = () => {
   const [position, setPosition] = useState<LatLng | null>(null)
+  const markerIcon = getMarkerIcon()
 
   const handleMapClick = (event: LeafletMouseEvent) => {
     setPosition(event.latlng)
@@ -17,15 +19,8 @@ export const LocationMarker = () => {
     return null
   }
 
-  const icon = new Icon({
-    iconUrl: '/marker-icon.png',
-    iconRetinaUrl: '/marker-icon.png',
-    popupAnchor: [-0, -0],
-    iconSize: [30, 40],
-  })
-
   return (
-    <Marker icon={icon} position={position}>
+    <Marker icon={markerIcon} position={position}>
       <Popup>You are here</Popup>
     </Marker>
   )
