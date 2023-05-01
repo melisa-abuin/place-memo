@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+message="$(cat $1)"
+requiredPattern="(feature|fix|refactor|deps)\s+#[0-9]" 
+if ! [[ $message =~ $requiredPattern ]];
+then
+  echo "-"
+  echo "🚨 Wrong commit message! 😕"
+  echo "-"
+  echo "The commit message must have this format:"
+  echo "<commit type> <issue number>: <what was done>"
+  echo "Available commit types: feature, fix, refactor, deps"
+  echo "Example: feature #1: some message"
+  echo "-"
+  echo "Your commit message was:"
+  echo $message
+  echo "-"
+  exit 1
+fi
