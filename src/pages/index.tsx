@@ -39,7 +39,13 @@ export const getStaticProps: GetStaticProps = async () => {
   const locations = await prisma.location.findMany()
 
   return {
-    props: { locations },
+    props: {
+      locations: locations.map((location) => ({
+        ...location,
+        xCoordinate: location.xCoordinate.toNumber(),
+        yCoordinate: location.yCoordinate.toNumber(),
+      })),
+    },
     revalidate: 10,
   }
 }
