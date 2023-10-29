@@ -41,7 +41,9 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     locations = (await prisma.location.findMany()) as LocationData[]
   } catch (e) {
-    alert('Database is not active')
+    // TODO: handle error properly with a modal
+    // eslint-disable-next-line
+    console.log('Database is not active')
   }
 
   return {
