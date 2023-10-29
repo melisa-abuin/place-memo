@@ -1,8 +1,10 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { LocationMarker } from './components/locationMarker'
+import { LocationClickMarker } from './components/locationClickMarker'
 import { SearchBox } from './components/searchBox'
+import type { Location } from '@/interfaces/location'
+import { LocationMarker } from './components/locationMarker'
 
-export const Map = () => (
+export const Map = ({ locations }: { locations: Location[] }) => (
   <MapContainer
     center={[51.505, -0.09]}
     minZoom={2}
@@ -17,6 +19,14 @@ export const Map = () => (
 
     <SearchBox />
 
-    <LocationMarker />
+    <LocationClickMarker />
+
+    {locations.map(({ id, xCoordinate, yCoordinate }) => (
+      <LocationMarker
+        key={id}
+        xCoordinate={xCoordinate}
+        yCoordinate={yCoordinate}
+      />
+    ))}
   </MapContainer>
 )

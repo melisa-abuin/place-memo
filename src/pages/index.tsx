@@ -2,6 +2,9 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import dynamic from 'next/dynamic'
+import { GetStaticProps } from 'next'
+import prisma from '../../prisma/client'
+import type { Location, LocationData } from '@/interfaces/location'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,7 +16,7 @@ const MapComponent = dynamic(
   }
 )
 
-export default function Home() {
+export default function Home({ locations }: { locations: Location[] }) {
   return (
     <>
       <Head>
@@ -22,11 +25,35 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className={styles.main}>
         <div className={inter.className}>
-          <MapComponent />
+          <MapComponent locations={locations} />
         </div>
       </main>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  let locations: LocationData[] = []
+
+  try {
+    locations = (await prisma.location.findMany()) as LocationData[]
+  } catch (e) {
+    // TODO: handle error properly with a modal
+    // eslint-disable-next-line
+    console.log('Database is not active')
+  }
+
+  return {
+    props: {
+      locations: locations.map((location) => ({
+        ...location,
+        xCoordinate: location.xCoordinate.toNumber(),
+        yCoordinate: location.yCoordinate.toNumber(),
+      })),
+    },
+    revalidate: 10,
+  }
 }

@@ -32,6 +32,8 @@ model Location {
   id       String  @id @default(cuid())
   title    String
   content  String?
+  xCoordinate Decimal @db.Decimal(6, 3)
+  yCoordinate Decimal @db.Decimal(6, 3)
   authorId String?
   author   User?   @relation(fields: [authorId], references: [id])
 }
