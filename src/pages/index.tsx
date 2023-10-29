@@ -4,7 +4,7 @@ import styles from '@/styles/Home.module.css'
 import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
 import prisma from '../../prisma/client'
-import type { Location } from '@/interfaces/location'
+import type { Location, LocationData } from '@/interfaces/location'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,7 +36,13 @@ export default function Home({ locations }: { locations: Location[] }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const locations = await prisma.location.findMany()
+  let locations: LocationData[] = []
+
+  try {
+    locations = (await prisma.location.findMany()) as LocationData[]
+  } catch (e) {
+    alert('Database is not active')
+  }
 
   return {
     props: {

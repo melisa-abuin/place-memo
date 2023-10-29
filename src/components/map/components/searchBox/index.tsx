@@ -24,7 +24,7 @@ export const SearchBox = () => {
     return () => {
       map.removeControl(searchControl)
     }
-  }, [])
+  }, [map])
 
   return null
 }
