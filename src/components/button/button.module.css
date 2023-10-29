@@ -1,0 +1,12 @@
+.button {
+  background-color: var(--primary-violet);
+  border-radius: 30px;
+  color: var(--primary-black);
+  cursor: pointer;
+  padding: 12px 100px;
+}
+
+.home {
+  position: absolute;
+  z-index: 1000;
+}

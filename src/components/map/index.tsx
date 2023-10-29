@@ -3,6 +3,7 @@ import { LocationClickMarker } from './components/locationClickMarker'
 import { SearchBox } from './components/searchBox'
 import type { Location } from '@/interfaces/location'
 import { LocationMarker } from './components/locationMarker'
+import { Button } from '../button'
 
 export const Map = ({ locations }: { locations: Location[] }) => (
   <MapContainer
@@ -28,5 +29,6 @@ export const Map = ({ locations }: { locations: Location[] }) => (
         yCoordinate={yCoordinate}
       />
     ))}
+    <Button onClick={() => {}}>Add place</Button>
   </MapContainer>
 )
