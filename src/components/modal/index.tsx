@@ -1,4 +1,5 @@
 import { Button } from '../button'
+import { Input } from '../input'
 import styles from './modal.module.css'
 import Image from 'next/image'
 
@@ -15,13 +16,11 @@ export const Modal = () => (
     </div>
     <div className={styles.content}>
       <form>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" required />
+        <div className={styles.input}>
+          <Input type="text" id="name" name="name" required />
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <input type="text" id="description" name="description" />
+        <div className={styles.input}>
+          <Input id="description" isTextArea name="description" />
         </div>
       </form>
     </div>

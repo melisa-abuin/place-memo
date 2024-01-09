@@ -1,8 +1,10 @@
 :root {
   --primary-violet: #aa85f8;
   --primary-black: #000000;
+  --primary-gray: #cecece;
   --secondary-violet: #4e3d70;
   --primary-layout: #251d36;
+  --secondary-layout: #2c2638;
   --primary-text: #ffffff;
 }
 
