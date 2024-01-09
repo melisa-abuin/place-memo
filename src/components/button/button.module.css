@@ -1,8 +1,31 @@
-.button {
+.base {
+  cursor: pointer;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.primary {
   background-color: var(--primary-violet);
   border: none;
-  border-radius: 30px;
   color: var(--primary-black);
   cursor: pointer;
-  padding: 12px 100px;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.rounded {
+  border-radius: 30px;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1px solid var(--primary-violet);
+  color: var(--primary-violet);
+  cursor: pointer;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.squared {
+  border-radius: 10px;
 }
