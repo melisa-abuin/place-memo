@@ -1,8 +1,12 @@
 import styles from './addPlaceButton.module.css'
 import { Button } from '@/components/button'
 
-export const AddPlaceButton = () => (
+interface Props {
+  onClick: () => void
+}
+
+export const AddPlaceButton = ({ onClick }: Props) => (
   <div className={styles.addPlaceButton}>
-    <Button onClick={() => {}}>Add place</Button>
+    <Button onClick={onClick}>Add place</Button>
   </div>
 )
