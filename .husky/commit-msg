@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 message="$(cat $1)"
-requiredPattern="(feature|fix|refactor|deps)[[:space:]]+#[0-9]+:[[:space:]]+[A-Za-z ]+$" 
+requiredPattern="(feature|fix|refactor|deps|test)[[:space:]]+#[0-9]+:[[:space:]]+[A-Za-z ]+$" 
 if ! [[ $message =~ $requiredPattern ]];
 then
   echo "-"
@@ -10,7 +10,7 @@ then
   echo "-"
   echo "The commit message must have this format:"
   echo "<commit type> <issue number>: <what was done>"
-  echo "Available commit types: feature, fix, refactor, deps"
+  echo "Available commit types: feature, fix, refactor, deps, test"
   echo "Example: feature #1: some message"
   echo "-"
   echo "Your commit message was:"
