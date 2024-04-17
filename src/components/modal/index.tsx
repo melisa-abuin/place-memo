@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '../button'
 import { Input } from '../input'
 import styles from './modal.module.css'
@@ -10,14 +11,24 @@ interface Props {
   onRightButtonClick: () => void
 }
 
+interface FieldValue {
+  [key: string]: string
+}
+
 export const Modal = ({
   modalState,
   onCrossClick,
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
+  const [fieldValues, setFieldValues] = useState({})
+
   if (!modalState) {
     return null
+  }
+
+  const onFieldChange = (value: FieldValue) => {
+    setFieldValues((prev) => ({ ...prev, ...value }))
   }
 
   return (
@@ -40,10 +51,21 @@ export const Modal = ({
       <div className={styles.content}>
         <form>
           <div className={styles.input}>
-            <Input type="text" id="name" name="name" required />
+            <Input
+              id="name"
+              name="name"
+              onChange={onFieldChange}
+              required
+              type="text"
+            />
           </div>
           <div className={styles.input}>
-            <Input id="description" isTextArea name="description" />
+            <Input
+              id="description"
+              isTextArea
+              name="description"
+              onChange={onFieldChange}
+            />
           </div>
         </form>
       </div>

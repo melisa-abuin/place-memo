@@ -18,6 +18,15 @@ export const Map = ({ locations }: { locations: Location[] }) => {
     setModalState(false)
   }
 
+  const submitData = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      // TODO: await fetch('/api/post', { ... })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       <MapContainer
@@ -49,7 +58,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         modalState={modalState}
         onCrossClick={closeModal}
         onLeftButtonClick={closeModal}
-        onRightButtonClick={closeModal}
+        onRightButtonClick={submitData}
       />
     </>
   )

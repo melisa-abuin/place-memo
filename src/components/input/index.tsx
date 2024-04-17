@@ -4,6 +4,7 @@ type Props = {
   id: string
   isTextArea?: boolean
   name: string
+  onChange: (e: { [key: string]: string }) => void
   required?: boolean
   type?: string
 }
@@ -12,9 +13,14 @@ export const Input = ({
   id,
   isTextArea = false,
   name,
+  onChange,
   required = false,
   type,
 }: Props) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChange({ [e.currentTarget.name]: e.currentTarget.value })
+
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{name}</label>
@@ -23,6 +29,7 @@ export const Input = ({
           className={styles.input}
           id={id}
           name={name}
+          onChange={handleChange}
           required={required}
           rows={8}
         />
@@ -31,6 +38,7 @@ export const Input = ({
           className={styles.input}
           id={id}
           name={name}
+          onChange={handleChange}
           required={required}
           type={type}
         />
