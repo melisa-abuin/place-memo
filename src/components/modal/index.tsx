@@ -55,13 +55,7 @@ export const Modal = ({
       <div className={styles.content}>
         <form>
           <div className={styles.input}>
-            <Input
-              id="name"
-              name="name"
-              onChange={onFieldChange}
-              required
-              type="text"
-            />
+            <Input id="name" name="name" onChange={onFieldChange} required />
           </div>
           <div className={styles.input}>
             <Input

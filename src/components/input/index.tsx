@@ -15,7 +15,7 @@ export const Input = ({
   name,
   onChange,
   required = false,
-  type,
+  type = 'text',
 }: Props) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,7 +23,7 @@ export const Input = ({
 
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={id}>{name}</label>
       {isTextArea ? (
         <textarea
           className={styles.input}
@@ -32,6 +32,9 @@ export const Input = ({
           onChange={handleChange}
           required={required}
           rows={8}
+          aria-label={name}
+          role="textbox"
+          placeholder="Trip to italy on march of 2021"
         />
       ) : (
         <input
@@ -41,6 +44,9 @@ export const Input = ({
           onChange={handleChange}
           required={required}
           type={type}
+          aria-label={name}
+          role="textbox"
+          placeholder="Best sunset I've ever seen"
         />
       )}
     </div>
