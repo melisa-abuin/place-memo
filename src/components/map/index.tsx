@@ -1,14 +1,17 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { LocationClickMarker } from './components/locationClickMarker'
 import { SearchBox } from './components/searchBox'
-import type { Location } from '@/interfaces/location'
+import type { Location, LocationFields } from '@/interfaces/location'
 import { LocationMarker } from './components/locationMarker'
 import { AddPlaceButton } from './components/addPlaceButton'
 import { Modal } from '../modal'
 import { useState } from 'react'
+import { LatLng } from 'leaflet'
 
 export const Map = ({ locations }: { locations: Location[] }) => {
   const [modalState, setModalState] = useState(false)
+  const [isAddButtonVisible, setIsAddButtonVisible] = useState(false)
+  const [currentLocation, setCurrentLocation] = useState<LatLng | null>(null)
 
   const openModal = () => {
     setModalState(true)
@@ -18,10 +21,27 @@ export const Map = ({ locations }: { locations: Location[] }) => {
     setModalState(false)
   }
 
-  const submitData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
+  const onMapClick = (position: LatLng) => {
+    setCurrentLocation(position)
+    setIsAddButtonVisible(true)
+  }
+
+  const submitData = async (fieldValues: LocationFields) => {
     try {
-      // TODO: await fetch('/api/post', { ... })
+      const body = {
+        title: fieldValues.name,
+        content: fieldValues.description,
+        xCoordinate: currentLocation?.lat,
+        yCoordinate: currentLocation?.lng,
+      }
+      console.log(body)
+
+      await fetch('/api/postLocation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      setModalState(false)
     } catch (error) {
       console.error(error)
     }
@@ -43,7 +63,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
 
         <SearchBox />
 
-        <LocationClickMarker />
+        <LocationClickMarker onMapClick={onMapClick} />
 
         {locations.map(({ id, xCoordinate, yCoordinate }) => (
           <LocationMarker
@@ -53,7 +73,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
           />
         ))}
       </MapContainer>
-      <AddPlaceButton onClick={openModal} />
+      {isAddButtonVisible && <AddPlaceButton onClick={openModal} />}
       <Modal
         modalState={modalState}
         onCrossClick={closeModal}

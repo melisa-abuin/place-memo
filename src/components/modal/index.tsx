@@ -3,16 +3,18 @@ import { Button } from '../button'
 import { Input } from '../input'
 import styles from './modal.module.css'
 import Image from 'next/image'
+import { LocationFields } from '@/interfaces/location'
 
 interface Props {
   modalState: boolean
   onCrossClick: () => void
   onLeftButtonClick: () => void
-  onRightButtonClick: (e: React.SyntheticEvent) => Promise<void>
+  onRightButtonClick: (args: LocationFields) => Promise<void>
 }
 
-interface FieldValue {
-  [key: string]: string
+const defaultFieldsValues = {
+  name: '',
+  desciption: '',
 }
 
 export const Modal = ({
@@ -21,13 +23,15 @@ export const Modal = ({
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
-  const [fieldValues, setFieldValues] = useState({})
+  const [fieldValues, setFieldValues] = useState<LocationFields>({
+    ...defaultFieldsValues,
+  })
 
   if (!modalState) {
     return null
   }
 
-  const onFieldChange = (value: FieldValue) => {
+  const onFieldChange = (value: Partial<LocationFields>) => {
     setFieldValues((prev) => ({ ...prev, ...value }))
   }
 
@@ -77,7 +81,10 @@ export const Modal = ({
         >
           Cancel
         </Button>
-        <Button borders="squared" onClick={onRightButtonClick}>
+        <Button
+          borders="squared"
+          onClick={() => onRightButtonClick(fieldValues)}
+        >
           Submit
         </Button>
       </div>
