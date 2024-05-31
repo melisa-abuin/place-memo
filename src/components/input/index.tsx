@@ -5,7 +5,9 @@ type Props = {
   isTextArea?: boolean
   name: string
   onChange: (e: { [key: string]: string }) => void
+  placeholder?: string
   required?: boolean
+  role?: string
   type?: string
 }
 
@@ -14,7 +16,9 @@ export const Input = ({
   isTextArea = false,
   name,
   onChange,
+  placeholder,
   required = false,
+  role = 'textbox',
   type = 'text',
 }: Props) => {
   const handleChange = (
@@ -33,8 +37,8 @@ export const Input = ({
           required={required}
           rows={8}
           aria-label={name}
-          role="textbox"
-          placeholder="Trip to italy on march of 2021"
+          role={role}
+          placeholder={placeholder}
         />
       ) : (
         <input
@@ -45,8 +49,8 @@ export const Input = ({
           required={required}
           type={type}
           aria-label={name}
-          role="textbox"
-          placeholder="Best sunset I've ever seen"
+          role={role}
+          placeholder={placeholder}
         />
       )}
     </div>

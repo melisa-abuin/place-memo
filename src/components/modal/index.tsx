@@ -55,7 +55,13 @@ export const Modal = ({
       <div className={styles.content}>
         <form>
           <div className={styles.input}>
-            <Input id="name" name="name" onChange={onFieldChange} required />
+            <Input
+              id="name"
+              name="name"
+              onChange={onFieldChange}
+              placeholder="Best sunset I've ever seen"
+              required
+            />
           </div>
           <div className={styles.input}>
             <Input
@@ -63,6 +69,7 @@ export const Modal = ({
               isTextArea
               name="description"
               onChange={onFieldChange}
+              placeholder="Trip to italy on march of 2021"
             />
           </div>
         </form>
