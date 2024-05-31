@@ -1,13 +1,20 @@
+import { useState } from 'react'
 import { Button } from '../button'
 import { Input } from '../input'
 import styles from './modal.module.css'
 import Image from 'next/image'
+import { LocationFields } from '@/interfaces/location'
 
 interface Props {
   modalState: boolean
   onCrossClick: () => void
   onLeftButtonClick: () => void
-  onRightButtonClick: () => void
+  onRightButtonClick: (args: LocationFields) => Promise<void>
+}
+
+const defaultFieldsValues = {
+  name: '',
+  desciption: '',
 }
 
 export const Modal = ({
@@ -16,8 +23,16 @@ export const Modal = ({
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
+  const [fieldValues, setFieldValues] = useState<LocationFields>({
+    ...defaultFieldsValues,
+  })
+
   if (!modalState) {
     return null
+  }
+
+  const onFieldChange = (value: Partial<LocationFields>) => {
+    setFieldValues((prev) => ({ ...prev, ...value }))
   }
 
   return (
@@ -40,10 +55,22 @@ export const Modal = ({
       <div className={styles.content}>
         <form>
           <div className={styles.input}>
-            <Input type="text" id="name" name="name" required />
+            <Input
+              id="name"
+              name="name"
+              onChange={onFieldChange}
+              placeholder="Best sunset I've ever seen"
+              required
+            />
           </div>
           <div className={styles.input}>
-            <Input id="description" isTextArea name="description" />
+            <Input
+              id="description"
+              isTextArea
+              name="description"
+              onChange={onFieldChange}
+              placeholder="Trip to italy on march of 2021"
+            />
           </div>
         </form>
       </div>
@@ -55,7 +82,10 @@ export const Modal = ({
         >
           Cancel
         </Button>
-        <Button borders="squared" onClick={onRightButtonClick}>
+        <Button
+          borders="squared"
+          onClick={() => onRightButtonClick(fieldValues)}
+        >
           Submit
         </Button>
       </div>

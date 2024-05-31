@@ -15,3 +15,8 @@ export interface LocationData {
   xCoordinate: Decimal
   yCoordinate: Decimal
 }
+
+export interface LocationFields {
+  name: string
+  description?: string
+}

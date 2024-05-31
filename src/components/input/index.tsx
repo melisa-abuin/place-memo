@@ -4,7 +4,10 @@ type Props = {
   id: string
   isTextArea?: boolean
   name: string
+  onChange: (e: { [key: string]: string }) => void
+  placeholder?: string
   required?: boolean
+  role?: string
   type?: string
 }
 
@@ -12,27 +15,42 @@ export const Input = ({
   id,
   isTextArea = false,
   name,
+  onChange,
+  placeholder,
   required = false,
-  type,
+  role = 'textbox',
+  type = 'text',
 }: Props) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => onChange({ [e.currentTarget.name]: e.currentTarget.value })
+
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{name}</label>
+      <label htmlFor={id}>{name}</label>
       {isTextArea ? (
         <textarea
           className={styles.input}
           id={id}
           name={name}
+          onChange={handleChange}
           required={required}
           rows={8}
+          aria-label={name}
+          role={role}
+          placeholder={placeholder}
         />
       ) : (
         <input
           className={styles.input}
           id={id}
           name={name}
+          onChange={handleChange}
           required={required}
           type={type}
+          aria-label={name}
+          role={role}
+          placeholder={placeholder}
         />
       )}
     </div>

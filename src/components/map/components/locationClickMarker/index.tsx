@@ -3,11 +3,16 @@ import { useState } from 'react'
 import { LatLng, LeafletMouseEvent } from 'leaflet'
 import { getMarkerIcon } from '../../utils/getMarkerIcon'
 
-export const LocationClickMarker = () => {
+interface Props {
+  onMapClick: (position: LatLng) => void
+}
+
+export const LocationClickMarker = ({ onMapClick }: Props) => {
   const [position, setPosition] = useState<LatLng | null>(null)
   const markerIcon = getMarkerIcon()
 
   const handleMapClick = (event: LeafletMouseEvent) => {
+    onMapClick(event.latlng)
     setPosition(event.latlng)
   }
 
