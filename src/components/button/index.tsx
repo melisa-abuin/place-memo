@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react'
 import styles from './button.module.css'
 
 type Props = PropsWithChildren<{
-  onClick: () => void
+  onClick: (...args: any[]) => void
   borders?: 'rounded' | 'squared'
   variant?: 'primary' | 'secondary'
 }>

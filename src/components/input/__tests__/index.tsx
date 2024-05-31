@@ -3,7 +3,9 @@ import { Input } from '..'
 
 describe('Input', () => {
   it('renders a label with input name', () => {
-    render(<Input id="testId" name="testName" type="submit" />)
+    render(
+      <Input id="testId" name="testName" type="submit" onChange={() => {}} />
+    )
 
     expect(screen.getByText('testName')).toBeInTheDocument()
   })

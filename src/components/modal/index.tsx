@@ -8,7 +8,7 @@ interface Props {
   modalState: boolean
   onCrossClick: () => void
   onLeftButtonClick: () => void
-  onRightButtonClick: () => void
+  onRightButtonClick: (e: React.SyntheticEvent) => Promise<void>
 }
 
 interface FieldValue {
