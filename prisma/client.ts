@@ -5,6 +5,7 @@ let prisma: PrismaClient
 if (process.env.NODE_ENV === 'production') {
   prisma = new PrismaClient()
 } else {
+  // Check if prisma instance is already created before attempting to create a new one
   if (!global.prisma) {
     global.prisma = new PrismaClient()
   }
