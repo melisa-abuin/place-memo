@@ -34,7 +34,6 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         xCoordinate: currentLocation?.lat,
         yCoordinate: currentLocation?.lng,
       }
-      console.log(body)
 
       await fetch('/api/postLocation', {
         method: 'POST',
@@ -43,7 +42,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
       })
       setModalState(false)
     } catch (error) {
-      console.error(error)
+      // TODO: show error tooltip
     }
   }
 
