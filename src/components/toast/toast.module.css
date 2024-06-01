@@ -1,0 +1,22 @@
+.base {
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+  color: var(--primary-text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
+
+.message {
+  padding-right: 5px;
+}
+
+.success {
+  background-color: var(--primary-success);
+}
+
+.error {
+  background-color: var(--primary-violet);
+}
