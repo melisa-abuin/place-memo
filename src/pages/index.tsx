@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
 import prisma from '../../prisma/client'
 import type { Location, LocationData } from '@/interfaces/location'
+import { ToastProvider } from '@/hooks/useToast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default function Home({ locations }: { locations: Location[] }) {
 
       <main className={styles.main}>
         <div className={inter.className}>
-          <MapComponent locations={locations} />
+          <ToastProvider>
+            <MapComponent locations={locations} />
+          </ToastProvider>
         </div>
       </main>
     </>
