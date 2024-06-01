@@ -8,9 +8,6 @@
   background-color: var(--primary-violet);
   border: none;
   color: var(--primary-black);
-  cursor: pointer;
-  padding: 12px 0;
-  width: 100%;
 }
 
 .rounded {
@@ -21,9 +18,6 @@
   background-color: transparent;
   border: 1px solid var(--primary-violet);
   color: var(--primary-violet);
-  cursor: pointer;
-  padding: 12px 0;
-  width: 100%;
 }
 
 .squared {
