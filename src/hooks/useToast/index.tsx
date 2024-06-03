@@ -1,4 +1,4 @@
-import { Toast as StyledToast } from '@/components/toast'
+import { Toast as StyledToast } from '../../components/toast'
 import { Toast } from '@/interfaces/toast'
 import React, { createContext, useCallback, useContext, useState } from 'react'
 
@@ -16,7 +16,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
 
   const showToast = useCallback(
-    (message: string, type: 'success' | 'error', duration: number = 43000) => {
+    (message: string, type: 'success' | 'error', duration: number = 3000) => {
       const id = Date.now()
       setToasts((prevToasts) => [...prevToasts, { id, message, type }])
 

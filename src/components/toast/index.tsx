@@ -7,16 +7,9 @@ type Props = {
   variant?: 'error' | 'success'
 }
 
-export const Toast = ({ message, onClick, variant = 'success' }: Props) => {
-  return (
-    <div className={`${styles.base} ${styles[variant]}`} onClick={onClick}>
-      <p className={styles.message}>{message}</p>
-      <Image
-        alt="Dismiss toast"
-        height={15}
-        src="/cross-circle.png"
-        width={15}
-      />
-    </div>
-  )
-}
+export const Toast = ({ message, onClick, variant = 'success' }: Props) => (
+  <div className={`${styles.base} ${styles[variant]}`} onClick={onClick}>
+    <p className={styles.message}>{message}</p>
+    <Image alt="Dismiss toast" height={15} src="/cross-circle.png" width={15} />
+  </div>
+)
