@@ -11,14 +11,6 @@
   padding: 0 32px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 24px 32px;
-}
-
 .input {
   margin-bottom: 24px;
 }
@@ -34,16 +26,4 @@
   right: 0;
   top: 0;
   z-index: 100;
-}
-
-.subtitle {
-  color: var(--primary-violet);
-  font-size: 16x;
-  font-weight: 400;
-}
-
-.title {
-  color: var(--primary-text);
-  font-size: 24px;
-  font-weight: 600;
 }

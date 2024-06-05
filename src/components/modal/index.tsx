@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Button } from '../button'
 import { Input } from '../input'
 import styles from './modal.module.css'
-import Image from 'next/image'
 import { LocationFields } from '@/interfaces/location'
+import { SectionHeader } from '../sectionHeader'
 
 interface Props {
   modalState: boolean
@@ -37,21 +37,17 @@ export const Modal = ({
 
   return (
     <div aria-labelledby="modalTitle" className={styles.modal} role="dialog">
-      <div className={styles.header}>
-        <div>
-          <h2 className={styles.title} id="modalTitle">
-            Add Place
-          </h2>
-          <p className={styles.subtitle}>To save a new memory</p>
-        </div>
-        <Image
-          alt="Close modal"
-          height={15}
-          onClick={onCrossClick}
-          src="/close-icon.png"
-          width={15}
-        />
-      </div>
+      <SectionHeader
+        id="modalTitle"
+        image={{
+          alt: 'Close modal',
+          height: 15,
+          onClick: onCrossClick,
+          width: 15,
+        }}
+        subtitle="To save a new memory"
+        title="Add Place"
+      />
       <div className={styles.content}>
         <form>
           <div className={styles.input}>
