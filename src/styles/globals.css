@@ -6,6 +6,8 @@
   --primary-layout: #251d36;
   --secondary-layout: #2c2638;
   --primary-text: #ffffff;
+  --primary-error: #ff4444;
+  --primary-success: #007e33;
 }
 
 * {
@@ -29,6 +31,19 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.toast-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  padding: 24px 32px;
+  position: fixed;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 /******* Leaflet styles *******/

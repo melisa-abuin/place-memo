@@ -7,11 +7,13 @@ import { AddPlaceButton } from './components/addPlaceButton'
 import { Modal } from '../modal'
 import { useState } from 'react'
 import { LatLng } from 'leaflet'
+import { useToast } from '@/hooks/useToast'
 
 export const Map = ({ locations }: { locations: Location[] }) => {
   const [modalState, setModalState] = useState(false)
   const [isAddButtonVisible, setIsAddButtonVisible] = useState(false)
   const [currentLocation, setCurrentLocation] = useState<LatLng | null>(null)
+  const { showToast } = useToast()
 
   const openModal = () => {
     setModalState(true)
@@ -41,8 +43,9 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         body: JSON.stringify(body),
       })
       setModalState(false)
+      showToast('Place added successfully', 'success')
     } catch (error) {
-      // TODO: show error tooltip
+      showToast('Something went wrong', 'error')
     }
   }
 
