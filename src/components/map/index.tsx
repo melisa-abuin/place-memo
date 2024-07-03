@@ -8,11 +8,14 @@ import { Modal } from '../modal'
 import { useState } from 'react'
 import { LatLng } from 'leaflet'
 import { useToast } from '@/hooks/useToast'
+import { PlaceInfo } from '../placeInfo'
 
 export const Map = ({ locations }: { locations: Location[] }) => {
   const [modalState, setModalState] = useState(false)
   const [isAddButtonVisible, setIsAddButtonVisible] = useState(false)
+  const [locationInfo, setLocationInfo] = useState<Location | null>(null)
   const [currentLocation, setCurrentLocation] = useState<LatLng | null>(null)
+
   const { showToast } = useToast()
 
   const openModal = () => {
@@ -27,6 +30,15 @@ export const Map = ({ locations }: { locations: Location[] }) => {
   const onMapClick = (position: LatLng) => {
     setCurrentLocation(position)
     setIsAddButtonVisible(true)
+  }
+
+  const onLocationClick = (location: Location) => {
+    setLocationInfo(location)
+    setIsAddButtonVisible(false)
+  }
+
+  const closeLocationInfo = () => {
+    setLocationInfo(null)
   }
 
   const submitData = async (fieldValues: LocationFields) => {
@@ -71,8 +83,8 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         {locations.map((location) => (
           <LocationMarker
             key={location.id}
-            {...location}
-            hideAddButton={() => setIsAddButtonVisible(false)}
+            location={location}
+            onClick={onLocationClick}
           />
         ))}
       </MapContainer>
@@ -83,6 +95,13 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         onLeftButtonClick={closeModal}
         onRightButtonClick={submitData}
       />
+      {!!locationInfo && (
+        <PlaceInfo
+          content={locationInfo.content}
+          onClose={closeLocationInfo}
+          title={locationInfo.title}
+        />
+      )}
     </>
   )
 }

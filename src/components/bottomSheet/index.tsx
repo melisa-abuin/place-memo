@@ -1,10 +1,9 @@
 import { Button } from '../button'
 import { SectionHeader } from '../sectionHeader'
 import styles from './bottomSheet.module.css'
+import { Location } from '@/interfaces/location'
 
-interface Props {
-  title: string
-  content: string
+interface Props extends Pick<Location, 'title' | 'content'> {
   onClose: () => void
 }
 

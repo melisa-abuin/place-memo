@@ -1,8 +1,7 @@
+import { Location } from '@/interfaces/location'
 import { BottomSheet } from '../bottomSheet'
 
-interface Props {
-  title: string
-  content: string
+interface Props extends Pick<Location, 'title' | 'content'> {
   onClose: () => void
 }
 
