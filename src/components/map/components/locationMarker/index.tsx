@@ -1,6 +1,7 @@
-import { Marker, Popup } from 'react-leaflet'
-
+import { Marker } from 'react-leaflet'
 import { getMarkerIcon } from '../../utils/getMarkerIcon'
+import { useState } from 'react'
+import { PlaceInfo } from '@/components/placeInfo'
 
 interface Props {
   xCoordinate: number
@@ -9,6 +10,20 @@ interface Props {
 
 export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
   const markerIcon = getMarkerIcon()
+  const [placeInfoVisible, setPlaceInfoVisible] = useState(false)
 
-  return <Marker icon={markerIcon} position={[xCoordinate, yCoordinate]} />
+  return (
+    <>
+      <Marker
+        icon={markerIcon}
+        eventHandlers={{
+          click: () => {
+            setPlaceInfoVisible((prevState) => !prevState)
+          },
+        }}
+        position={[xCoordinate, yCoordinate]}
+      />
+      {placeInfoVisible && <PlaceInfo />}
+    </>
+  )
 }
