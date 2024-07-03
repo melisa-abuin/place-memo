@@ -7,10 +7,9 @@ describe('Button', () => {
     const onClickMock = jest.fn()
     render(<Button onClick={onClickMock}>test</Button>)
 
-    screen.getByText('test')
-
     expect(screen.getByText('test')).toBeInTheDocument()
   })
+
   it('calls onclick function correctly', async () => {
     const onClickMock = jest.fn()
     render(<Button onClick={onClickMock}>test</Button>)

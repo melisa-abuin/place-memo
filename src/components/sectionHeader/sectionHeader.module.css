@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 24px 32px;
+}
+
+.subtitle {
+  color: var(--primary-violet);
+  font-size: 16x;
+  font-weight: 400;
+}
+
+.title {
+  color: var(--primary-text);
+  font-size: 24px;
+  font-weight: 600;
+}

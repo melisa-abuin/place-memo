@@ -8,14 +8,18 @@ import { Modal } from '../modal'
 import { useState } from 'react'
 import { LatLng } from 'leaflet'
 import { useToast } from '@/hooks/useToast'
+import { PlaceInfo } from '../placeInfo'
 
 export const Map = ({ locations }: { locations: Location[] }) => {
   const [modalState, setModalState] = useState(false)
   const [isAddButtonVisible, setIsAddButtonVisible] = useState(false)
+  const [locationInfo, setLocationInfo] = useState<Location | null>(null)
   const [currentLocation, setCurrentLocation] = useState<LatLng | null>(null)
+
   const { showToast } = useToast()
 
   const openModal = () => {
+    setIsAddButtonVisible(false)
     setModalState(true)
   }
 
@@ -26,6 +30,15 @@ export const Map = ({ locations }: { locations: Location[] }) => {
   const onMapClick = (position: LatLng) => {
     setCurrentLocation(position)
     setIsAddButtonVisible(true)
+  }
+
+  const onLocationClick = (location: Location) => {
+    setLocationInfo(location)
+    setIsAddButtonVisible(false)
+  }
+
+  const closeLocationInfo = () => {
+    setLocationInfo(null)
   }
 
   const submitData = async (fieldValues: LocationFields) => {
@@ -67,11 +80,11 @@ export const Map = ({ locations }: { locations: Location[] }) => {
 
         <LocationClickMarker onMapClick={onMapClick} />
 
-        {locations.map(({ id, xCoordinate, yCoordinate }) => (
+        {locations.map((location) => (
           <LocationMarker
-            key={id}
-            xCoordinate={xCoordinate}
-            yCoordinate={yCoordinate}
+            key={location.id}
+            location={location}
+            onClick={onLocationClick}
           />
         ))}
       </MapContainer>
@@ -82,6 +95,13 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         onLeftButtonClick={closeModal}
         onRightButtonClick={submitData}
       />
+      {!!locationInfo && (
+        <PlaceInfo
+          content={locationInfo.content}
+          onClose={closeLocationInfo}
+          title={locationInfo.title}
+        />
+      )}
     </>
   )
 }

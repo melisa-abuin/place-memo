@@ -1,14 +1,25 @@
-import { Marker, Popup } from 'react-leaflet'
-
+import { Marker } from 'react-leaflet'
 import { getMarkerIcon } from '../../utils/getMarkerIcon'
+import { Location } from '@/interfaces/location'
 
 interface Props {
-  xCoordinate: number
-  yCoordinate: number
+  onClick: (location: Location) => void
+  location: Location
 }
 
-export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
+export const LocationMarker = ({ onClick, location }: Props) => {
+  const { xCoordinate, yCoordinate } = location
   const markerIcon = getMarkerIcon()
 
-  return <Marker icon={markerIcon} position={[xCoordinate, yCoordinate]} />
+  return (
+    <Marker
+      icon={markerIcon}
+      eventHandlers={{
+        click: () => {
+          onClick(location)
+        },
+      }}
+      position={[xCoordinate, yCoordinate]}
+    />
+  )
 }
