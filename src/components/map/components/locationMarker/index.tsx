@@ -2,13 +2,20 @@ import { Marker } from 'react-leaflet'
 import { getMarkerIcon } from '../../utils/getMarkerIcon'
 import { useState } from 'react'
 import { PlaceInfo } from '@/components/placeInfo'
+import { Location } from '@/interfaces/location'
 
 interface Props {
-  xCoordinate: number
-  yCoordinate: number
+  hideAddButton: () => void
 }
 
-export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
+export const LocationMarker = ({
+  hideAddButton,
+  id,
+  title,
+  content,
+  xCoordinate,
+  yCoordinate,
+}: Location & Props) => {
   const markerIcon = getMarkerIcon()
   const [placeInfoVisible, setPlaceInfoVisible] = useState(false)
 
@@ -23,11 +30,15 @@ export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
         eventHandlers={{
           click: () => {
             setPlaceInfoVisible((prevState) => !prevState)
+            // TODO: handle this in another way
+            hideAddButton()
           },
         }}
         position={[xCoordinate, yCoordinate]}
       />
-      {placeInfoVisible && <PlaceInfo onClose={closePlaceInfo} />}
+      {placeInfoVisible && (
+        <PlaceInfo content={content} onClose={closePlaceInfo} title={title} />
+      )}
     </>
   )
 }

@@ -3,10 +3,12 @@ import { SectionHeader } from '../sectionHeader'
 import styles from './bottomSheet.module.css'
 
 interface Props {
+  title: string
+  content: string
   onClose: () => void
 }
 
-export const BottomSheet = ({ onClose }: Props) => {
+export const BottomSheet = ({ content, onClose, title }: Props) => {
   return (
     <div className={styles.externalContainer} onClick={onClose}>
       <div className={styles.bottomSheet}>
@@ -18,11 +20,11 @@ export const BottomSheet = ({ onClose }: Props) => {
             onClick: onClose,
             width: 15,
           }}
-          subtitle="More info"
-          title="Info"
+          subtitle="TBD"
+          title={title}
         />
         <div className={styles.content}>
-          content
+          {content}
           <div role="group" aria-label="actions" className={styles.buttonGroup}>
             <Button
               borders="squared"

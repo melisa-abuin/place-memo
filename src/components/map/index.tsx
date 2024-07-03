@@ -16,6 +16,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
   const { showToast } = useToast()
 
   const openModal = () => {
+    setIsAddButtonVisible(false)
     setModalState(true)
   }
 
@@ -67,11 +68,11 @@ export const Map = ({ locations }: { locations: Location[] }) => {
 
         <LocationClickMarker onMapClick={onMapClick} />
 
-        {locations.map(({ id, xCoordinate, yCoordinate }) => (
+        {locations.map((location) => (
           <LocationMarker
-            key={id}
-            xCoordinate={xCoordinate}
-            yCoordinate={yCoordinate}
+            key={location.id}
+            {...location}
+            hideAddButton={() => setIsAddButtonVisible(false)}
           />
         ))}
       </MapContainer>

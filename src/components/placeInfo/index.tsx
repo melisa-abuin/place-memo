@@ -1,10 +1,12 @@
 import { BottomSheet } from '../bottomSheet'
 
 interface Props {
+  title: string
+  content: string
   onClose: () => void
 }
 
-export const PlaceInfo = ({ onClose }: Props) => {
+export const PlaceInfo = ({ content, onClose, title }: Props) => {
   // TODO: create desambiguation between bottom sheet and drawer on mobile and desktop
-  return <BottomSheet onClose={onClose} />
+  return <BottomSheet content={content} onClose={onClose} title={title} />
 }
