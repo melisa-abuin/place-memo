@@ -25,14 +25,10 @@ export const BottomSheet = ({ content, onClose, title }: Props) => {
         <div className={styles.content}>
           {content}
           <div role="group" aria-label="actions" className={styles.buttonGroup}>
-            <Button
-              borders="squared"
-              onClick={() => console.log('delete')}
-              variant="secondary"
-            >
+            <Button borders="squared" onClick={() => {}} variant="secondary">
               Delete
             </Button>
-            <Button borders="squared" onClick={() => console.log('edit')}>
+            <Button borders="squared" onClick={() => {}}>
               Edit
             </Button>
           </div>
