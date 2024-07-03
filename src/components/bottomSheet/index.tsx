@@ -9,7 +9,7 @@ interface Props extends Pick<Location, 'title' | 'content'> {
 
 export const BottomSheet = ({ content, onClose, title }: Props) => {
   return (
-    <div className={styles.externalContainer} onClick={onClose}>
+    <div className={styles.externalContainer} role="dialog" onClick={onClose}>
       <div className={styles.bottomSheet}>
         <SectionHeader
           id="bottomSheet"
