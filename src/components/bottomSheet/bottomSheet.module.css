@@ -1,13 +1,10 @@
 .bottomSheet {
   background-color: var(--primary-layout);
-  bottom: 0;
   color: var(--primary-text);
   display: flex;
   flex-direction: column;
-  left: 0;
   position: absolute;
-  right: 0;
-  z-index: 1000;
+  width: 100%;
 }
 
 .buttonGroup {
@@ -20,4 +17,16 @@
 
 .content {
   padding: 0 32px 24px 32px;
+}
+
+.externalContainer {
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }

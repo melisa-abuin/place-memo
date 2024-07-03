@@ -12,6 +12,10 @@ export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
   const markerIcon = getMarkerIcon()
   const [placeInfoVisible, setPlaceInfoVisible] = useState(false)
 
+  const closePlaceInfo = () => {
+    setPlaceInfoVisible(false)
+  }
+
   return (
     <>
       <Marker
@@ -23,7 +27,7 @@ export const LocationMarker = ({ xCoordinate, yCoordinate }: Props) => {
         }}
         position={[xCoordinate, yCoordinate]}
       />
-      {placeInfoVisible && <PlaceInfo />}
+      {placeInfoVisible && <PlaceInfo onClose={closePlaceInfo} />}
     </>
   )
 }
