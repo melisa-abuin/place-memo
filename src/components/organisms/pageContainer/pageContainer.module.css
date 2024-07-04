@@ -1,0 +1,10 @@
+.container {
+  align-items: center;
+  background-color: var(--primary-black);
+  color: var(--primary-text);
+  display: flex;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
