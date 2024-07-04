@@ -1,28 +1,33 @@
 import { useState } from 'react'
 import styles from './modal.module.css'
-import { LocationFields } from '@/interfaces/location'
+import { Location, LocationFields } from '@/interfaces/location'
 import { SectionHeader } from '@/components/atoms/sectionHeader'
 import { Input } from '@/components/atoms/input'
 import { Button } from '@/components/atoms/button'
 
 interface Props {
+  locationData: Location | null
   modalState: boolean
   setModalState: (state: boolean) => void
   onLeftButtonClick?: () => void
   onRightButtonClick?: (args: LocationFields) => Promise<void>
 }
 
-const defaultFieldValues = {
-  name: '',
-  desciption: '',
+const getDefaultFieldValues = (location: Location | null) => {
+  return {
+    name: location?.title ?? '',
+    description: location?.content ?? '',
+  }
 }
 
 export const Modal = ({
+  locationData,
   modalState,
   setModalState,
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
+  const defaultFieldValues = getDefaultFieldValues(locationData)
   const [fieldValues, setFieldValues] = useState<LocationFields>({
     ...defaultFieldValues,
   })

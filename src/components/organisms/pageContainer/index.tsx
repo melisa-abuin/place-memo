@@ -81,9 +81,10 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
       {isAddButtonVisible && <AddPlaceButton onClick={openModal} />}
 
       <Modal
+        locationData={currentLocation}
         modalState={modalState}
-        setModalState={setModalState}
         onRightButtonClick={submitData}
+        setModalState={setModalState}
       />
 
       {!!currentLocation && (
