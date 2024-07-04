@@ -1,5 +1,5 @@
 import styles from './addPlaceButton.module.css'
-import { Button } from '@/components/button'
+import { Button } from '@/components/atoms/button'
 
 interface Props {
   onClick: () => void

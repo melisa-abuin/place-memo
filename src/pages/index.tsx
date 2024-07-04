@@ -10,7 +10,7 @@ import { ToastProvider } from '@/hooks/useToast'
 const inter = Inter({ subsets: ['latin'] })
 
 const MapComponent = dynamic(
-  () => import('@/components/map').then((module) => module.Map),
+  () => import('@/components/molecules/map').then((module) => module.Map),
   {
     ssr: false,
     loading: () => <p>Loading...</p>,

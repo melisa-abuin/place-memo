@@ -2,7 +2,6 @@ import { Marker, useMapEvents } from 'react-leaflet'
 import { useState } from 'react'
 import { LatLng, LeafletMouseEvent } from 'leaflet'
 import { getMarkerIcon } from '../../utils/getMarkerIcon'
-import { PlaceInfo } from '@/components/placeInfo'
 
 interface Props {
   onMapClick: (position: LatLng) => void

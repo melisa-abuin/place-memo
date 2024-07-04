@@ -1,4 +1,4 @@
-import { Toast as StyledToast } from '../../components/toast'
+import { Toast as StyledToast } from '../../components/atoms/toast'
 import { Toast } from '@/interfaces/toast'
 import React, { createContext, useCallback, useContext, useState } from 'react'
 

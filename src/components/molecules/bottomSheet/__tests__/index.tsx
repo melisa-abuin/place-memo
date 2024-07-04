@@ -13,14 +13,30 @@ const locationMock = {
 describe('BottomSheet', () => {
   it('renders info correctly', async () => {
     const onClickMock = jest.fn()
-    render(<BottomSheet title={locationMock.title} onClose={onClickMock} />)
+    const onRightButtonClick = jest.fn()
+
+    render(
+      <BottomSheet
+        title={locationMock.title}
+        closeBottomSheet={onClickMock}
+        onRightButtonClick={onRightButtonClick}
+      />
+    )
 
     expect(screen.getByText(locationMock.title)).toBeInTheDocument()
   })
 
   it('calls onClose function correctly', async () => {
     const onClickMock = jest.fn()
-    render(<BottomSheet title={locationMock.title} onClose={onClickMock} />)
+    const onRightButtonClick = jest.fn()
+
+    render(
+      <BottomSheet
+        title={locationMock.title}
+        closeBottomSheet={onClickMock}
+        onRightButtonClick={onRightButtonClick}
+      />
+    )
 
     await userEvent.click(screen.getByRole('dialog'))
 

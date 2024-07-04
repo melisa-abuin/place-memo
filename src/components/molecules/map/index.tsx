@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { LatLng } from 'leaflet'
 import { useToast } from '@/hooks/useToast'
 import { PlaceInfo } from '../placeInfo'
+import { tileLayerUrl } from '@/constants'
 
 export const Map = ({ locations }: { locations: Location[] }) => {
   const [modalState, setModalState] = useState(false)
@@ -21,10 +22,6 @@ export const Map = ({ locations }: { locations: Location[] }) => {
   const openModal = () => {
     setIsAddButtonVisible(false)
     setModalState(true)
-  }
-
-  const closeModal = () => {
-    setModalState(false)
   }
 
   const onMapClick = (position: LatLng) => {
@@ -41,6 +38,10 @@ export const Map = ({ locations }: { locations: Location[] }) => {
     setLocationInfo(null)
   }
 
+  const onLocationEdit = () => {
+    setModalState(true)
+  }
+
   const submitData = async (fieldValues: LocationFields) => {
     try {
       const body = {
@@ -55,7 +56,7 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      setModalState(false)
+
       showToast('Place added successfully', 'success')
     } catch (error) {
       showToast('Something went wrong', 'error')
@@ -72,14 +73,11 @@ export const Map = ({ locations }: { locations: Location[] }) => {
         zoom={4}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url={tileLayerUrl}
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
-
         <SearchBox />
-
         <LocationClickMarker onMapClick={onMapClick} />
-
         {locations.map((location) => (
           <LocationMarker
             key={location.id}
@@ -91,14 +89,14 @@ export const Map = ({ locations }: { locations: Location[] }) => {
       {isAddButtonVisible && <AddPlaceButton onClick={openModal} />}
       <Modal
         modalState={modalState}
-        onCrossClick={closeModal}
-        onLeftButtonClick={closeModal}
+        setModalState={setModalState}
         onRightButtonClick={submitData}
       />
       {!!locationInfo && (
         <PlaceInfo
           content={locationInfo.content}
           onClose={closeLocationInfo}
+          onEdit={onLocationEdit}
           title={locationInfo.title}
         />
       )}

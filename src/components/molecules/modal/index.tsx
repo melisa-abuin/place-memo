@@ -1,31 +1,43 @@
 import { useState } from 'react'
-import { Button } from '../button'
-import { Input } from '../input'
 import styles from './modal.module.css'
 import { LocationFields } from '@/interfaces/location'
-import { SectionHeader } from '../sectionHeader'
+import { SectionHeader } from '@/components/atoms/sectionHeader'
+import { Input } from '@/components/atoms/input'
+import { Button } from '@/components/atoms/button'
 
 interface Props {
   modalState: boolean
-  onCrossClick: () => void
-  onLeftButtonClick: () => void
-  onRightButtonClick: (args: LocationFields) => Promise<void>
+  setModalState: (state: boolean) => void
+  onLeftButtonClick?: () => void
+  onRightButtonClick?: (args: LocationFields) => Promise<void>
 }
 
-const defaultFieldsValues = {
+const defaultFieldValues = {
   name: '',
   desciption: '',
 }
 
 export const Modal = ({
   modalState,
-  onCrossClick,
+  setModalState,
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
   const [fieldValues, setFieldValues] = useState<LocationFields>({
-    ...defaultFieldsValues,
+    ...defaultFieldValues,
   })
+
+  const closeModal = () => setModalState(false)
+
+  const handleLeftButtonClick = () => {
+    closeModal()
+    onLeftButtonClick && onLeftButtonClick()
+  }
+
+  const handleRightButtonClick = () => {
+    closeModal()
+    onRightButtonClick && onRightButtonClick(fieldValues)
+  }
 
   if (!modalState) {
     return null
@@ -42,7 +54,7 @@ export const Modal = ({
         image={{
           alt: 'Close modal',
           height: 15,
-          onClick: onCrossClick,
+          onClick: closeModal,
           width: 15,
         }}
         subtitle="To save a new memory"
@@ -73,15 +85,12 @@ export const Modal = ({
       <div className={styles.buttonGroup}>
         <Button
           borders="squared"
-          onClick={onLeftButtonClick}
+          onClick={handleLeftButtonClick}
           variant="secondary"
         >
           Cancel
         </Button>
-        <Button
-          borders="squared"
-          onClick={() => onRightButtonClick(fieldValues)}
-        >
+        <Button borders="squared" onClick={handleRightButtonClick}>
           Submit
         </Button>
       </div>
