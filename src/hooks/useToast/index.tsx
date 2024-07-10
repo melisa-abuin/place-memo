@@ -30,20 +30,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="toast-container">
-        {toasts.map((toast) => (
-          <StyledToast
-            key={toast.id}
-            message={toast.message}
-            onClick={() =>
-              setToasts((prevToasts) =>
-                prevToasts.filter((prevToast) => prevToast.id !== toast.id)
-              )
-            }
-            variant={toast.type}
-          />
-        ))}
-      </div>
+      {!!toasts.length && (
+        <div className="toast-container">
+          {toasts.map((toast) => (
+            <StyledToast
+              key={toast.id}
+              message={toast.message}
+              onClick={() =>
+                setToasts((prevToasts) =>
+                  prevToasts.filter((prevToast) => prevToast.id !== toast.id)
+                )
+              }
+              variant={toast.type}
+            />
+          ))}
+        </div>
+      )}
     </ToastContext.Provider>
   )
 }

@@ -9,6 +9,7 @@ type Props = {
   required?: boolean
   role?: string
   type?: string
+  value?: string
 }
 
 export const Input = ({
@@ -20,6 +21,7 @@ export const Input = ({
   required = false,
   role = 'textbox',
   type = 'text',
+  value = '',
 }: Props) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,6 +41,7 @@ export const Input = ({
           aria-label={name}
           role={role}
           placeholder={placeholder}
+          value={value}
         />
       ) : (
         <input
@@ -51,6 +54,7 @@ export const Input = ({
           aria-label={name}
           role={role}
           placeholder={placeholder}
+          value={value}
         />
       )}
     </div>

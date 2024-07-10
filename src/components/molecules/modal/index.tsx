@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './modal.module.css'
 import { Location, LocationFields } from '@/interfaces/location'
 import { SectionHeader } from '@/components/atoms/sectionHeader'
@@ -27,11 +27,14 @@ export const Modal = ({
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
+  const isEditing = !!locationData
   const defaultFieldValues = getDefaultFieldValues(locationData)
-  const [fieldValues, setFieldValues] = useState<LocationFields>({
-    ...defaultFieldValues,
-  })
+  const [fieldValues, setFieldValues] =
+    useState<LocationFields>(defaultFieldValues)
 
+  useEffect(() => setFieldValues(defaultFieldValues), [])
+
+  console.log(fieldValues)
   const closeModal = () => setModalState(false)
 
   const handleLeftButtonClick = () => {
@@ -63,7 +66,7 @@ export const Modal = ({
           width: 15,
         }}
         subtitle="To save a new memory"
-        title="Add Place"
+        title={isEditing ? 'Edit Place' : 'Add Place'}
       />
       <div className={styles.content}>
         <form>
@@ -74,6 +77,7 @@ export const Modal = ({
               onChange={onFieldChange}
               placeholder="Best sunset I've ever seen"
               required
+              value={fieldValues.name}
             />
           </div>
           <div className={styles.input}>
@@ -83,6 +87,7 @@ export const Modal = ({
               name="description"
               onChange={onFieldChange}
               placeholder="Trip to italy on march of 2021"
+              value={fieldValues.description}
             />
           </div>
         </form>

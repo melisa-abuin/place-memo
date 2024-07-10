@@ -24,6 +24,7 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
     null
   )
   const [currentLocation, setCurrentLocation] = useState<Location | null>(null)
+  const [bottomSheetState, setBottomSheetState] = useState(false)
 
   const { showToast } = useToast()
 
@@ -34,15 +35,17 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
 
   const onMapClick = (coords: LatLng) => {
     setCurrentCoordinates(coords)
+    setCurrentLocation(null)
     setIsAddButtonVisible(true)
   }
 
   const onLocationClick = (location: Location) => {
+    setBottomSheetState(true)
     setCurrentLocation(location)
     setIsAddButtonVisible(false)
   }
 
-  const closeLocationInfo = () => setCurrentLocation(null)
+  const closeLocationInfo = () => setBottomSheetState(false)
 
   const onLocationEdit = () => setModalState(true)
 
@@ -81,13 +84,14 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
       {isAddButtonVisible && <AddPlaceButton onClick={openModal} />}
 
       <Modal
+        key={currentLocation ? currentLocation.id : 0}
         locationData={currentLocation}
         modalState={modalState}
         onRightButtonClick={submitData}
         setModalState={setModalState}
       />
 
-      {!!currentLocation && (
+      {bottomSheetState && currentLocation && (
         <PlaceInfo
           content={currentLocation.content}
           onClose={closeLocationInfo}
