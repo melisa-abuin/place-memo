@@ -5,6 +5,7 @@ import { Button } from '../../../components/atoms/button'
 
 interface Props extends Pick<Location, 'title' | 'content'> {
   closeBottomSheet: () => void
+  onLeftButtonClick: () => void
   onRightButtonClick: () => void
 }
 
@@ -12,6 +13,7 @@ export const BottomSheet = ({
   content,
   closeBottomSheet,
   onRightButtonClick,
+  onLeftButtonClick,
   title,
 }: Props) => {
   return (
@@ -35,7 +37,11 @@ export const BottomSheet = ({
         <div className={styles.content}>
           {content}
           <div role="group" aria-label="actions" className={styles.buttonGroup}>
-            <Button borders="squared" onClick={() => {}} variant="secondary">
+            <Button
+              borders="squared"
+              onClick={onLeftButtonClick}
+              variant="secondary"
+            >
               Delete
             </Button>
             <Button borders="squared" onClick={onRightButtonClick}>

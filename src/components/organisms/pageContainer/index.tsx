@@ -92,6 +92,19 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
     }
   }
 
+  const deleteLocation = async () => {
+    try {
+      await fetch(`/api/deleteLocation/${currentLocation?.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
+
+      showToast('Place deleted successfully', 'success')
+    } catch (error) {
+      showToast('Something went wrong', 'error')
+    }
+  }
+
   return (
     <div className={styles.container}>
       <MapComponent
@@ -114,6 +127,7 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
         <PlaceInfo
           content={currentLocation.content}
           onClose={closeLocationInfo}
+          onDelete={deleteLocation}
           onEdit={openModal}
           title={currentLocation.title}
         />
