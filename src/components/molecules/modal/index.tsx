@@ -32,7 +32,7 @@ export const Modal = ({
   const [fieldValues, setFieldValues] =
     useState<LocationFields>(defaultFieldValues)
 
-  useEffect(() => setFieldValues(defaultFieldValues), [])
+  useEffect(() => setFieldValues(defaultFieldValues), [defaultFieldValues])
 
   const closeModal = () => setModalState(false)
 
