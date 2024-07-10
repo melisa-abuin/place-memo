@@ -47,7 +47,26 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
 
   const closeLocationInfo = () => setBottomSheetState(false)
 
-  const onLocationEdit = () => setModalState(true)
+  const editData = async (fieldValues: LocationFields) => {
+    const { name, description } = fieldValues
+
+    try {
+      const body = {
+        title: name,
+        content: description,
+      }
+
+      await fetch(`/api/patchLocation/${currentLocation?.id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+
+      showToast('Place edited successfully', 'success')
+    } catch (error) {
+      showToast('Something went wrong', 'error')
+    }
+  }
 
   const submitData = async (fieldValues: LocationFields) => {
     const { lat, lng } = currentCoordinates ?? {}
@@ -87,7 +106,7 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
         key={currentLocation ? currentLocation.id : 0}
         locationData={currentLocation}
         modalState={modalState}
-        onRightButtonClick={submitData}
+        onRightButtonClick={!!currentLocation ? editData : submitData}
         setModalState={setModalState}
       />
 
@@ -95,7 +114,7 @@ export const PageContainer = ({ locations }: { locations: Location[] }) => {
         <PlaceInfo
           content={currentLocation.content}
           onClose={closeLocationInfo}
-          onEdit={onLocationEdit}
+          onEdit={openModal}
           title={currentLocation.title}
         />
       )}
