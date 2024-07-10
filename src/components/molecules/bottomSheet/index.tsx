@@ -4,21 +4,23 @@ import { Location } from '@/interfaces/location'
 import { Button } from '../../../components/atoms/button'
 
 interface Props extends Pick<Location, 'title' | 'content'> {
-  closeBottomSheet: () => void
-  onRightButtonClick: () => void
+  onCloseButtonClick: () => void
+  onPrimaryButtonClick: () => void
+  onSecondaryButtonClick: () => void
 }
 
 export const BottomSheet = ({
   content,
-  closeBottomSheet,
-  onRightButtonClick,
+  onCloseButtonClick,
+  onPrimaryButtonClick,
+  onSecondaryButtonClick,
   title,
 }: Props) => {
   return (
     <div
       className={styles.externalContainer}
       role="dialog"
-      onClick={closeBottomSheet}
+      onClick={onCloseButtonClick}
     >
       <div className={styles.bottomSheet}>
         <SectionHeader
@@ -26,7 +28,7 @@ export const BottomSheet = ({
           image={{
             alt: 'Close bottom sheet',
             height: 15,
-            onClick: closeBottomSheet,
+            onClick: onCloseButtonClick,
             width: 15,
           }}
           subtitle="TBD"
@@ -35,10 +37,18 @@ export const BottomSheet = ({
         <div className={styles.content}>
           {content}
           <div role="group" aria-label="actions" className={styles.buttonGroup}>
-            <Button borders="squared" onClick={() => {}} variant="secondary">
+            <Button
+              borders="squared"
+              onClick={onSecondaryButtonClick}
+              variant="secondary"
+            >
               Delete
             </Button>
-            <Button borders="squared" onClick={onRightButtonClick}>
+            <Button
+              borders="squared"
+              onClick={onPrimaryButtonClick}
+              variant="primary"
+            >
               Edit
             </Button>
           </div>

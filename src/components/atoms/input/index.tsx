@@ -1,6 +1,6 @@
 import styles from './input.module.css'
 
-type Props = {
+interface Props {
   id: string
   isTextArea?: boolean
   name: string
