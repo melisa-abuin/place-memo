@@ -13,16 +13,14 @@ interface Props {
   title: string
 }
 
-export const SectionHeader = ({ id, image, subtitle, title }: Props) => {
-  return (
-    <div className={styles.container}>
-      <div>
-        <h2 className={styles.title} id={id}>
-          {title}
-        </h2>
-        <p className={styles.subtitle}>{subtitle}</p>
-      </div>
-      <Image src="/close-icon.png" {...image} />
+export const SectionHeader = ({ id, image, subtitle, title }: Props) => (
+  <div className={styles.container}>
+    <div>
+      <h2 className={styles.title} id={id}>
+        {title}
+      </h2>
+      <p className={styles.subtitle}>{subtitle}</p>
     </div>
-  )
-}
+    <Image src="/close-icon.png" {...image} />
+  </div>
+)

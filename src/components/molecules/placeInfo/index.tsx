@@ -18,9 +18,9 @@ export const PlaceInfo = ({
   return (
     <BottomSheet
       content={content}
-      closeBottomSheet={onClose}
-      onLeftButtonClick={onDelete}
-      onRightButtonClick={onEdit}
+      onCloseButtonClick={onClose}
+      onSecondaryButtonClick={onDelete}
+      onPrimaryButtonClick={onEdit}
       title={title}
     />
   )
