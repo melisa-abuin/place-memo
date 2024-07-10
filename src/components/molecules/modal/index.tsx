@@ -1,31 +1,50 @@
-import { useState } from 'react'
-import { Button } from '../button'
-import { Input } from '../input'
+import { useEffect, useState } from 'react'
 import styles from './modal.module.css'
-import { LocationFields } from '@/interfaces/location'
-import { SectionHeader } from '../sectionHeader'
+import { Location, LocationFields } from '@/interfaces/location'
+import { SectionHeader } from '@/components/atoms/sectionHeader'
+import { Input } from '@/components/atoms/input'
+import { Button } from '@/components/atoms/button'
 
 interface Props {
+  locationData?: Location | null
   modalState: boolean
-  onCrossClick: () => void
-  onLeftButtonClick: () => void
-  onRightButtonClick: (args: LocationFields) => Promise<void>
+  setModalState: (state: boolean) => void
+  onLeftButtonClick?: () => void
+  onRightButtonClick?: (args: LocationFields) => Promise<void>
 }
 
-const defaultFieldsValues = {
-  name: '',
-  desciption: '',
+const getDefaultFieldValues = (location?: Location | null) => {
+  return {
+    name: location?.title ?? '',
+    description: location?.content ?? '',
+  }
 }
 
 export const Modal = ({
+  locationData,
   modalState,
-  onCrossClick,
+  setModalState,
   onLeftButtonClick,
   onRightButtonClick,
 }: Props) => {
-  const [fieldValues, setFieldValues] = useState<LocationFields>({
-    ...defaultFieldsValues,
-  })
+  const isEditing = !!locationData
+  const defaultFieldValues = getDefaultFieldValues(locationData)
+  const [fieldValues, setFieldValues] =
+    useState<LocationFields>(defaultFieldValues)
+
+  useEffect(() => setFieldValues(defaultFieldValues), [defaultFieldValues])
+
+  const closeModal = () => setModalState(false)
+
+  const handleLeftButtonClick = () => {
+    closeModal()
+    onLeftButtonClick && onLeftButtonClick()
+  }
+
+  const handleRightButtonClick = () => {
+    closeModal()
+    onRightButtonClick && onRightButtonClick(fieldValues)
+  }
 
   if (!modalState) {
     return null
@@ -42,11 +61,11 @@ export const Modal = ({
         image={{
           alt: 'Close modal',
           height: 15,
-          onClick: onCrossClick,
+          onClick: closeModal,
           width: 15,
         }}
         subtitle="To save a new memory"
-        title="Add Place"
+        title={isEditing ? 'Edit Place' : 'Add Place'}
       />
       <div className={styles.content}>
         <form>
@@ -57,6 +76,7 @@ export const Modal = ({
               onChange={onFieldChange}
               placeholder="Best sunset I've ever seen"
               required
+              value={fieldValues.name}
             />
           </div>
           <div className={styles.input}>
@@ -66,6 +86,7 @@ export const Modal = ({
               name="description"
               onChange={onFieldChange}
               placeholder="Trip to italy on march of 2021"
+              value={fieldValues.description}
             />
           </div>
         </form>
@@ -73,15 +94,12 @@ export const Modal = ({
       <div className={styles.buttonGroup}>
         <Button
           borders="squared"
-          onClick={onLeftButtonClick}
+          onClick={handleLeftButtonClick}
           variant="secondary"
         >
           Cancel
         </Button>
-        <Button
-          borders="squared"
-          onClick={() => onRightButtonClick(fieldValues)}
-        >
+        <Button borders="squared" onClick={handleRightButtonClick}>
           Submit
         </Button>
       </div>

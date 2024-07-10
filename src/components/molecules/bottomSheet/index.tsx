@@ -1,22 +1,32 @@
-import { Button } from '../button'
-import { SectionHeader } from '../sectionHeader'
+import { SectionHeader } from '../../../components/atoms/sectionHeader'
 import styles from './bottomSheet.module.css'
 import { Location } from '@/interfaces/location'
+import { Button } from '../../../components/atoms/button'
 
 interface Props extends Pick<Location, 'title' | 'content'> {
-  onClose: () => void
+  closeBottomSheet: () => void
+  onRightButtonClick: () => void
 }
 
-export const BottomSheet = ({ content, onClose, title }: Props) => {
+export const BottomSheet = ({
+  content,
+  closeBottomSheet,
+  onRightButtonClick,
+  title,
+}: Props) => {
   return (
-    <div className={styles.externalContainer} role="dialog" onClick={onClose}>
+    <div
+      className={styles.externalContainer}
+      role="dialog"
+      onClick={closeBottomSheet}
+    >
       <div className={styles.bottomSheet}>
         <SectionHeader
           id="bottomSheet"
           image={{
             alt: 'Close bottom sheet',
             height: 15,
-            onClick: onClose,
+            onClick: closeBottomSheet,
             width: 15,
           }}
           subtitle="TBD"
@@ -28,7 +38,7 @@ export const BottomSheet = ({ content, onClose, title }: Props) => {
             <Button borders="squared" onClick={() => {}} variant="secondary">
               Delete
             </Button>
-            <Button borders="squared" onClick={() => {}}>
+            <Button borders="squared" onClick={onRightButtonClick}>
               Edit
             </Button>
           </div>

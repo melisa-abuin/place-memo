@@ -1,21 +1,13 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/home.module.css'
-import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
 import prisma from '../../prisma/client'
 import type { Location, LocationData } from '@/interfaces/location'
 import { ToastProvider } from '@/hooks/useToast'
+import { PageContainer } from '@/components/organisms/pageContainer'
 
 const inter = Inter({ subsets: ['latin'] })
-
-const MapComponent = dynamic(
-  () => import('@/components/map').then((module) => module.Map),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-)
 
 export default function Home({ locations }: { locations: Location[] }) {
   return (
@@ -27,12 +19,10 @@ export default function Home({ locations }: { locations: Location[] }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <div className={inter.className}>
-          <ToastProvider>
-            <MapComponent locations={locations} />
-          </ToastProvider>
-        </div>
+      <main className={`${styles.main} ${inter.className}`}>
+        <ToastProvider>
+          <PageContainer locations={locations} />
+        </ToastProvider>
       </main>
     </>
   )

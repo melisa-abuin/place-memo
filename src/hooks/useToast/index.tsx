@@ -1,4 +1,4 @@
-import { Toast as StyledToast } from '../../components/toast'
+import { Toast as StyledToast } from '../../components/atoms/toast'
 import { Toast } from '@/interfaces/toast'
 import React, { createContext, useCallback, useContext, useState } from 'react'
 
@@ -30,20 +30,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="toast-container">
-        {toasts.map((toast) => (
-          <StyledToast
-            key={toast.id}
-            message={toast.message}
-            onClick={() =>
-              setToasts((prevToasts) =>
-                prevToasts.filter((prevToast) => prevToast.id !== toast.id)
-              )
-            }
-            variant={toast.type}
-          />
-        ))}
-      </div>
+      {!!toasts.length && (
+        <div className="toast-container">
+          {toasts.map((toast) => (
+            <StyledToast
+              key={toast.id}
+              message={toast.message}
+              onClick={() =>
+                setToasts((prevToasts) =>
+                  prevToasts.filter((prevToast) => prevToast.id !== toast.id)
+                )
+              }
+              variant={toast.type}
+            />
+          ))}
+        </div>
+      )}
     </ToastContext.Provider>
   )
 }
