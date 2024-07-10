@@ -6,14 +6,14 @@ import { Input } from '@/components/atoms/input'
 import { Button } from '@/components/atoms/button'
 
 interface Props {
-  locationData: Location | null
+  locationData?: Location | null
   modalState: boolean
   setModalState: (state: boolean) => void
   onLeftButtonClick?: () => void
   onRightButtonClick?: (args: LocationFields) => Promise<void>
 }
 
-const getDefaultFieldValues = (location: Location | null) => {
+const getDefaultFieldValues = (location?: Location | null) => {
   return {
     name: location?.title ?? '',
     description: location?.content ?? '',
@@ -34,7 +34,6 @@ export const Modal = ({
 
   useEffect(() => setFieldValues(defaultFieldValues), [])
 
-  console.log(fieldValues)
   const closeModal = () => setModalState(false)
 
   const handleLeftButtonClick = () => {

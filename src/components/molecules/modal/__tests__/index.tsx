@@ -6,7 +6,7 @@ describe('Modal', () => {
     const { container } = render(
       <Modal
         modalState={false}
-        onCrossClick={jest.fn()}
+        setModalState={jest.fn()}
         onLeftButtonClick={jest.fn()}
         onRightButtonClick={jest.fn()}
       />
